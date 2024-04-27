@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import wordSet from "./WordSet";
 
-const PlayGame = ({ onChangeScore }) => {
+const PlayGame = ({ onChangeScore, onChangeStatusGame }) => {
     const [dataTyping, setDataTyping] = useState([]);
     const [textTyping, setTextTyping] = useState({
         value: "",
         position: 0,
     });
+
     useEffect(() => {
-        const addWord = (wordCount = 150) => {
+        const addWord = (wordCount = 42) => {
             const wordList = wordSet;
             const dataTypingTest = [];
             for (let i = 0; i < wordCount; i++) {
@@ -20,12 +21,20 @@ const PlayGame = ({ onChangeScore }) => {
             }
             setDataTyping(dataTypingTest);
         };
-        if (dataTyping.length === 0) {
+        if (dataTyping.length === 0 || textTyping.position >= dataTyping.length) {
             addWord();
+            setTextTyping({
+                ...textTyping,
+                position: 0
+            })
         }
-    }, []);
+    }, [textTyping.position]);
 
     const handleChangeTyping = (e) => {
+        const timeOutGame = setTimeout(() => {
+            onChangeStatusGame('endGame');
+        }, 30000);
+
         const valueInput = e.target.value;
         if (!valueInput.includes(" ")) {
             setTextTyping({
@@ -38,8 +47,9 @@ const PlayGame = ({ onChangeScore }) => {
                 position: textTyping.position + 1
             })
         }
-        console.log(textTyping)
         checkResult(valueInput);
+
+        return () => clearTimeout(timeOutGame);
     };
 
     const checkResult = (valueInput) => {
@@ -47,16 +57,11 @@ const PlayGame = ({ onChangeScore }) => {
         const wordCheck = dataCheck[textTyping.position].value;
         if (valueInput.at(-1) === wordCheck[valueInput.length - 1]) {
             dataCheck[textTyping.position].status.push('correct');
+            onChangeScore('correct');
         } else {
             dataCheck[textTyping.position].status.push('incorrect');
+            onChangeScore('incorrect');
         }
-        // for (let i = 0; i < wordCheck.length; i++) {
-        //     if (textTyping.value[i] === wordCheck[i]) {
-        //         dataCheck[textTyping.position].status.push('correct');
-        //     } else {
-        //         dataCheck[textTyping.position].status.push('incorrect');
-        //     }
-        // }
         setDataTyping(dataCheck);
     };
 

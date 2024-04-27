@@ -94,6 +94,16 @@
   color : #aa5050
 }
 
+.inputForm {
+  position: relative;
+  top:-100px;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+}
+
 input {
-  opacity: 0
+  width: 90%;
+  height: 100px;
+  opacity: 0;
 }

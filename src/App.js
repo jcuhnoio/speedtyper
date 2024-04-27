@@ -5,7 +5,10 @@ import PlayGame from "./components/PlayGame";
 import EndGame from "./components/EndGame";
 import { useEffect, useState } from "react";
 
+
+
 function App() {
+
   const [statusGame, setStatusGame] = useState(null);
   const [score, setScore] = useState(null);
 
@@ -13,7 +16,7 @@ function App() {
     if (statusGame === "playGame") {
       setScore({
         correct: 0,
-        wrong: 0,
+        incorrect: 0,
       });
     }
   }, [statusGame]);
@@ -23,7 +26,7 @@ function App() {
   };
 
   const handleChangeScore = (type) => {
-    if (type === "right") {
+    if (type === "correct") {
       setScore({
         ...score,
         correct: score.correct + 1,
@@ -31,7 +34,7 @@ function App() {
     } else {
       setScore({
         ...score,
-        wrong: score.wrong + 1,
+        incorrect: score.incorrect + 1,
       });
     }
   };
@@ -39,7 +42,7 @@ function App() {
   let layout;
   switch (statusGame) {
     case "playGame":
-      layout = <PlayGame onChangeScore={handleChangeScore}/>;
+      layout = <PlayGame onChangeScore={handleChangeScore} onChangeStatusGame={handleChangeStatusGame} />;
       break;
     case "endGame":
       layout = <EndGame />;
