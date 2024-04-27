@@ -68,6 +68,7 @@
 .wordWrapper {
     padding: 32px;
     height: 72px;
+    max-width: 800px;
     overflow: hidden;
 }
 
@@ -83,4 +84,16 @@
   margin: .25em;
   font-variant: no-common-ligatures;
   border-bottom: 2px solid transparent;
+}
+
+.correct {
+  color: #588559
+}
+
+.incorrect {
+  color : #aa5050
+}
+
+input {
+  opacity: 0
 }
