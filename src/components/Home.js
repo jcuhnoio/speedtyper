@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Home = ({ onGame }) => {
   return (
     <div className="home">

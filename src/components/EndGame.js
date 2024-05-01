@@ -1,3 +1,5 @@
+import React from 'react';
+
 const EndGame = ({score, onGame}) => {
   console.log(score)
   
