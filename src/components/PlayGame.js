@@ -7,6 +7,8 @@ const PlayGame = ({ onChangeScore, onChangeStatusGame }) => {
         value: "",
         position: 0,
     });
+    const [seconds, setSeconds] = useState(30);
+    const [startTimer, setStartTimer] = useState(false);
 
     useEffect(() => {
         const addWord = (wordCount = 42) => {
@@ -30,7 +32,22 @@ const PlayGame = ({ onChangeScore, onChangeStatusGame }) => {
         }
     }, [textTyping.position]);
 
+    useEffect(() => {
+        if (startTimer) {
+            const interval = setInterval(() => {
+                if (seconds > 0) {
+                    setSeconds(prevSeconds => prevSeconds - 1);
+                } else {
+                    clearInterval(interval);
+                }
+            }, 1000);
+
+            return () => clearInterval(interval);
+        }
+    }, [startTimer, seconds]);
+
     const handleChangeTyping = (e) => {
+        setStartTimer(true);
         const timeOutGame = setTimeout(() => {
             onChangeStatusGame('endGame');
         }, 30000);
@@ -41,32 +58,49 @@ const PlayGame = ({ onChangeScore, onChangeStatusGame }) => {
                 ...textTyping,
                 value: valueInput
             });
+            checkResult(valueInput);
         } else {
             setTextTyping({
                 value: "",
                 position: textTyping.position + 1
             })
         }
-        checkResult(valueInput);
-
         return () => clearTimeout(timeOutGame);
     };
 
     const checkResult = (valueInput) => {
         const dataCheck = dataTyping;
         const wordCheck = dataCheck[textTyping.position].value;
-        if (valueInput.at(-1) === wordCheck[valueInput.length - 1]) {
-            dataCheck[textTyping.position].status.push('correct');
-            onChangeScore('correct');
-        } else {
-            dataCheck[textTyping.position].status.push('incorrect');
-            onChangeScore('incorrect');
+        dataCheck[textTyping.position].status = []
+        for (let i = 0; i < valueInput.length; i++) {
+            if (valueInput.at(i) === wordCheck[i]) {
+                dataCheck[textTyping.position].status.push('correct');
+            } else {
+                dataCheck[textTyping.position].status.push('incorrect');
+            }
+        }
+        if (valueInput.length === wordCheck.length) {
+            checkScore(dataCheck, wordCheck)
         }
         setDataTyping(dataCheck);
     };
 
+    const checkScore = (dataCheck, wordCheck) => {
+        for (let i = 0; i < wordCheck.length; i++) {
+            if (dataCheck[textTyping.position].status[i] === 'correct') {
+                onChangeScore('correct')
+                console.log('correct')
+            }
+            else if (dataCheck[textTyping.position].status[i] === 'incorrect') {
+                onChangeScore('incorrect')
+                console.log('incorrect')
+            }
+        }
+    }
+
     return (
         <div className="playing">
+            <div className="timer">{seconds}</div>
             <div className="wordWrapper">
                 <div className="words">
                     {dataTyping.map((word, index) => (

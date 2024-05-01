@@ -43,9 +43,10 @@ function App() {
   switch (statusGame) {
     case "playGame":
       layout = <PlayGame onChangeScore={handleChangeScore} onChangeStatusGame={handleChangeStatusGame} />;
+      console.log(score);
       break;
     case "endGame":
-      layout = <EndGame />;
+      layout = <EndGame score={score} onGame={handleChangeStatusGame} />;
       break;
     default:
       layout = <Home onGame={handleChangeStatusGame} />;
