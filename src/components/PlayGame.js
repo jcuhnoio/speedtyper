@@ -40,6 +40,7 @@ const PlayGame = ({ onChangeScore, onChangeStatusGame }) => {
                     setSeconds(prevSeconds => prevSeconds - 1);
                 } else {
                     clearInterval(interval);
+                    onChangeStatusGame('endGame');
                 }
             }, 1000);
 
@@ -49,9 +50,6 @@ const PlayGame = ({ onChangeScore, onChangeStatusGame }) => {
 
     const handleChangeTyping = (e) => {
         setStartTimer(true);
-        const timeOutGame = setTimeout(() => {
-            onChangeStatusGame('endGame');
-        }, 30000);
 
         const valueInput = e.target.value;
         if (!valueInput.includes(" ")) {
@@ -66,7 +64,6 @@ const PlayGame = ({ onChangeScore, onChangeStatusGame }) => {
                 position: textTyping.position + 1
             })
         }
-        return () => clearTimeout(timeOutGame);
     };
 
     const checkResult = (valueInput) => {
