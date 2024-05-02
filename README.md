@@ -20,7 +20,7 @@ Speedtyper was created using React. Here are some explanations for our implement
 
 ## Challenges:
 
-Lorem
+One of the biggest challenges when implementing this game was streamlining the typing experience. There were many different ways to implement it, and required lots of tweaking in order to make it feel natural. There could be possible areas of improvement to the typing experience still, like adding a typing cursor, or the space key acting dynamically to where the user is currently typing, instead of moving the user onto the next word.
 
 ## How to run:
 
