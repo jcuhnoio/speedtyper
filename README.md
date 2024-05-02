@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Speedtyper: WebDev Final Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**By Juno Choi and Ben Kim.** This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Speedtyper is a typing game that times the player while they type out a randomly generated string of words. After 30 seconds, the player receives their words per minute (WPM) average, as well as the overall accuracy percentage.
 
-In the project directory, you can run:
+## How does it work?
 
-### `npm start`
+Speedtyper was created using React.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1.  **useState and useEffect**: The game utilizes `useState` for managing various states such as score, timer, current word list, and user input. The `useEffect` hook is helps initialize the game, adding words, managing the countdown timer, and transitioning to the end game state once the timer expires.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2.  **Word Management**: The `PlayGame` component generates a random list of words from a preset array (`wordSet`) and manages the current typing position and user input, facilitating the typing test mechanism.
 
-### `npm test`
+3.  **Typing Handler (`handleChangeTyping`)**: This function updates the user's current input and handles the transition to the next word when a space is entered. It also activates the timer upon the first input and evaluates the correctness of the typed characters via `checkResult`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4.  **Score Handling (`checkScore` and `onChangeScore`)**: `checkScore` assesses each typed word for correctness and updates the score by invoking `onChangeScore`, which modifies the game's score state based on correct or incorrect entries.
 
-### `npm run build`
+5.  **Component Structure**: The application dynamically alters its layout based on the game status (`statusGame`), transitioning between different views/components (`Home`, `PlayGame`, and `EndGame`) to guide the player through the game's various stages (starting, playing, and ending).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Challenges:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Lorem
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How to run:
 
-### `npm run eject`
+A build of speedtyper is deployed at: <https://jcuhnoio.github.io/speedtyper/>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To run locally, install the latest version of [Node.js](https://nodejs.org/) on your system. Then, in the project directory, run `npm start`. This runs the app in the development mode. Open <http://localhost:3000> to view it in your browser.
