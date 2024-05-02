@@ -6,7 +6,7 @@ Speedtyper is a typing game that times the player while they type out a randomly
 
 ## How does it work?
 
-Speedtyper was created using React.
+Speedtyper was created using React. Here are some explanations for our implementation:
 
 1.  **useState and useEffect**: The game utilizes `useState` for managing various states such as score, timer, current word list, and user input. The `useEffect` hook is helps initialize the game, adding words, managing the countdown timer, and transitioning to the end game state once the timer expires.
 
