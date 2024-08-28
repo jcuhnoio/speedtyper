@@ -1,4 +1,4 @@
-# Speedtyper: WebDev Final Project
+# Speedtyper
 
 **By Juno Choi and Ben Kim.** This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
